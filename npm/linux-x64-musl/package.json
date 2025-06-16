@@ -1,6 +1,6 @@
 {
   "name": "node-screenshots-linux-x64-musl",
-  "version": "0.0.0",
+  "version": "0.2.4",
   "os": [
     "linux"
   ],
