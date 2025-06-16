@@ -48,6 +48,10 @@ export declare class Monitor {
   captureImageSync(): Image
   /** Capture image of the monitor asynchronously */
   captureImage(): Promise<Image>
+  /** Capture image of a region of the monitor synchronously */
+  captureRegionSync(x: number, y: number, w: number, h: number): Image
+  /** Capture image of a region of the monitor asynchronously */
+  captureRegion(x: number, y: number, w: number, h: number): Promise<Image>
 }
 export declare class Window {
   /** List all windows, sorted by z coordinate. */

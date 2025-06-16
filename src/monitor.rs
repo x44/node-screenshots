@@ -133,4 +133,21 @@ impl Monitor {
     pub fn capture_image(&self) -> AsyncTask<AsyncCapture> {
         AsyncTask::new(AsyncCapture::Monitor(self.x_cap_monitor.clone()))
     }
+
+    /// Capture image of a region of the monitor synchronously
+    #[napi]
+    pub fn capture_region_sync(&self, x: u32, y: u32, w: u32, h: u32) -> Result<Image> {
+        let rgba_image = self
+            .x_cap_monitor
+			.capture_region(x, y, w, h)
+            .map_err(|err| Error::from_reason(err.to_string()))?;
+
+        Ok(Image::from(rgba_image))
+    }
+
+    /// Capture image of a region of the monitor asynchronously
+    #[napi]
+    pub fn capture_region(&self, x: u32, y: u32, w: u32, h: u32) -> AsyncTask<AsyncCapture> {
+        AsyncTask::new(AsyncCapture::MonitorRegion(self.x_cap_monitor.clone(), x, y, w, h))
+    }
 }
